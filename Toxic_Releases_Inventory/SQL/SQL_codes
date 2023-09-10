@@ -1,1 +1,146 @@
+###-- TO CREATE THE TABLE.
+
+CREATE TABLE toxic17 (
+  year INT,
+  trifd VARCHAR(50),
+  frs_id BIGINT NOT NULL,
+  facility_name VARCHAR(200) ,
+  street_address  VARCHAR(100) ,
+  city VARCHAR(45) ,
+  county VARCHAR(45) ,
+  st VARCHAR(5),
+  zip INT,
+  latitude DECIMAL(12,9),
+  longitude DECIMAL(12,9),
+  federal_facility VARCHAR (55),
+  industry_sector_code INT,
+  industry_sector VARCHAR (55),
+  chemical TEXT,
+  carcinogen VARCHAR (55),
+  unit_of_measure VARCHAR (55),
+  on_site_release_total FLOAT(53),
+  off_site_release_total FLOAT(53),
+  off_site_recycled_total FLOAT(53),
+  off_site_energy_recovery_t FLOAT(53),
+  off_site_treated_total FLOAT(53),
+  total_transfer FLOAT(53),
+  total_releases FLOAT(53),
+  releases FLOAT(53),
+  production_wste FLOAT(53)
+)
+
+###--HOW MUCH TOXIC WASTE WAS RELEASED BY DIFFERENT STATES FROM 2017 TO 2021?
+
+SELECT st, ROUND(SUM(total_releases):: NUMERIC ,2):: FLOAT as all_releases
+ FROM (
+        SELECT st,total_releases
+	 	FROM toxic21
+	    UNION ALL
+	 	SELECT st, total_releases
+	    FROM toxic20
+	    UNION ALL
+	 	SELECT st, total_releases
+	    FROM toxic19
+	    UNION ALL
+	 	SELECT st, total_releases
+	    FROM toxic18
+	    UNION ALL
+	 	SELECT st, total_releases
+	    FROM toxic17
+ ) AS combined_releases
+ GROUP BY st
+ ORDER BY all_releases DESC
+ 
+###-- HOW MUCH TOXIC WASTE WAS RELEASED FROM 2017 TO 2021?
+
+SELECT ROUND(SUM(total_releases):: NUMERIC ,2):: FLOAT as all_releases
+ FROM (
+        SELECT total_releases
+	 	FROM toxic21
+	    UNION ALL
+	 	SELECT  total_releases
+	    FROM toxic20
+	    UNION ALL
+	 	SELECT  total_releases
+	    FROM toxic19
+	    UNION ALL
+	 	SELECT  total_releases
+	    FROM toxic18
+	    UNION ALL
+	 	SELECT total_releases
+	    FROM toxic17
+ ) AS combined_releases
+
+
+###-- WHICH INDUSTRY SECTOR RELEASES MORE TOXIC CHEMICALS?
+
+SELECT industry_sector_code, 
+industry_sector, 
+ROUND (SUM (total_releases):: NUMERIC, 2) ::FLOAT as all_releases
+from(
+        SELECT industry_sector_code,industry_sector,total_releases
+	 	FROM toxic21
+	    UNION ALL
+	 	SELECT industry_sector_code,industry_sector,total_releases
+	    FROM toxic20
+	    UNION ALL
+	 	SELECT industry_sector_code,industry_sector,total_releases
+	    FROM toxic19
+	    UNION ALL
+	 	SELECT industry_sector_code,industry_sector,total_releases
+	    FROM toxic18
+	    UNION ALL
+	 	SELECT industry_sector_code,industry_sector,total_releases
+	    FROM toxic17
+ ) AS combined_releases
+ GROUP BY industry_sector_code,industry_sector
+ ORDER BY all_releases DESC
+
+###--WHAT IS THE RELEASE TREND FROM 2017 TO 2021?
+
+SELECT year, 
+ROUND(SUM(total_releases):: NUMERIC ,2):: FLOAT as all_releases
+ FROM (
+	   SELECT year,total_releases
+	 	FROM toxic21
+	    UNION ALL
+	 	SELECT year,total_releases
+	    FROM toxic20
+	    UNION ALL
+	 	SELECT year,total_releases
+	    FROM toxic19
+	    UNION ALL
+	 	SELECT year,total_releases
+	    FROM toxic18
+	    UNION ALL
+	 	SELECT year,total_releases
+	    FROM toxic17
+ ) AS combined_releases
+ GROUP BY year
+ ORDER BY all_releases DESC
+
+###-- WHAT WERE THE MOST COMMON TOXIC CHEMICALS RELEASED? TOP 10?
+
+SELECT chemical,
+ROUND(SUM(total_releases):: NUMERIC ,2):: FLOAT as all_releases
+FROM (
+	   SELECT chemical,total_releases
+	 	FROM toxic21
+	    UNION ALL
+	 	SELECT chemical,total_releases
+	    FROM toxic20
+	    UNION ALL
+	 	SELECT chemical,total_releases
+	    FROM toxic19
+	    UNION ALL
+	 	SELECT chemical,total_releases
+	    FROM toxic18
+	    UNION ALL
+	 	SELECT chemical,total_releases
+	    FROM toxic17
+ ) AS combined_releases
+ GROUP BY chemical
+ ORDER BY all_releases DESC
+ LIMIT 10
+
 
