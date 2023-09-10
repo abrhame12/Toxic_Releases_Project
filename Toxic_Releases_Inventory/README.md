@@ -16,4 +16,4 @@ Upon finishing the project, here are some of my key findings.
 1. 52% of toxic materials released were isolated to Just 5 States which are Alaska, Nevada, Utah, Texas, and Louisiana.
 2. Total releases decreased from 2017 to 2020 however it looks like they are on an upward trend after 2020.
 3. The metal mining industry is the top industry sector with the most toxic releases in the U.S.
-4. Zinc Compounds are the most released chemical in the U.S. from 2017 to 2021 and are prevalent in the mining industry.
+4. Zinc Compounds are the most released chemical in the U.S. from 2017 to 2021 and are prevalent in the metal mining industry.
