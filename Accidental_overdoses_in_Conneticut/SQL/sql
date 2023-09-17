@@ -1,1 +1,96 @@
+--To create the table
+
+CREATE TABLE opioids
+(
+    reported_date DATE,
+    date_type VARCHAR(155),
+    age INT,
+    sex VARCHAR(15),
+    race VARCHAR(255),
+    residence_city VARCHAR(255),
+    residence_county VARCHAR(255),
+    residence_state VARCHAR(255),
+    injury_city VARCHAR(255),
+    injury_county VARCHAR(255),
+    injury_state VARCHAR(255),
+    injury_place VARCHAR(255),
+    description_of_injury VARCHAR(255),
+    death_city VARCHAR(255),
+    death_county VARCHAR(255),
+    death_state VARCHAR(255),
+    location VARCHAR(255),
+    location_if_other VARCHAR(255),
+    cause_of_death TEXT,
+    manner_of_death VARCHAR(255),
+    other_significant_conditions VARCHAR(255),
+    heroin INT,
+    heroin_death_certificate INT,
+    cocaine INT,
+    fentanyl INT,
+    fentanyl_analogue INT,
+    oxycodone INT,
+    oxymorphone INT,
+    ethanol INT,
+    hydrocodone INT,
+    benzodiazepine INT,
+    methadone INT,
+    methamphetamine INT,
+    amphet INT,
+    tramad INT,
+    hydromorphone INT,
+    morphine_not_heroin INT,
+    xylazine INT,
+    gabapentin INT,
+    opiate_nos INT,
+    heroin_morph_codeine INT,
+    other_opioid VARCHAR(255),
+    any_opioid INT,
+    other VARCHAR(255),
+    residencecitygeo VARCHAR(255),
+    injurycitygeo VARCHAR(255),
+    deathcitygeo VARCHAR(255)
+)
+
+  --WHAT IS THE TREND FROM 2012 TO 2022 IN ACCIDENTAL DRUG-RELATED DEATHS?
+  
+SELECT EXTRACT ( YEAR from reported_date)as year, date_type, COUNT(*)
+FROM opioids
+GROUP BY year
+ORDER BY YEAR DESC
+
+-- WHICH SEX HAS THE MOST DEATHS?
+  
+SELECT sex, COUNT(*) as total_deaths
+FROM opioids
+WHERE sex IS NOT NULL
+GROUP BY sex
+
+-- WHICH RACE HAS THE MOST DEATHS?
+  
+SELECT race, COUNT(*) as total_deaths
+FROM opioids
+WHERE race IS NOT NULL
+GROUP BY race
+
+-- WHICH AGE HAS THE MOST DEATHS?
+
+SELECT age, COUNT(*) as total_deaths
+FROM opioids
+WHERE age IS NOT NULL
+GROUP BY age
+  
+-- WHICH COUNTY HAS THE MOST DEATHS?
+  
+SELECT death_county, COUNT(*) as total_deaths
+FROM opioids
+GROUP BY death_county
+ORDER BY total_deaths desc
+
+-- WHAT LOCATION DID MOST DEATHS OCCUR IN?
+
+SELECT location, COUNT(*) as total_deaths
+FROM opioids
+GROUP BY location
+ORDER BY total_deaths desc
+
 
