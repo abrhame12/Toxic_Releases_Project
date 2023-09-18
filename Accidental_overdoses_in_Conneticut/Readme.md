@@ -1,4 +1,4 @@
-# Accidental Overdoses in Connecticut
+# Accidental Drug Related Deaths in Connecticut
 
 ## Objective
 Opioid usage and opioid-related overdoses have become serious public health issues in the United States. My project particularly focuses on the opioid epidemic in the state of Connecticut. This Project explores accidental overdoses and drug-related deaths from 2012 to 2022. The purpose of this project was to provide insight into how this epidemic has affected certain demographics of people in conjunction with their geographic location within Connecticut. I was able to wrangle and analyze data from the past decade through Excel and SQL. Lastly, I visualized my findings in the form of a dashboard on Tableau Public. Check out my dashboard [here](https://public.tableau.com/app/profile/abrham.eshetu/viz/AccidentalDrugRelatedDeathsinConnecticut_16950028012660/Dashboard12)
